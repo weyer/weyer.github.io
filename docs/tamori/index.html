@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -10,23 +10,25 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Pixelify+Sans:wght@500;700&display=swap"
     />
-    <script type="module" crossorigin src="./assets/index-CGuCAnFe.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-TGp3wINp.css">
+    <script type="module" crossorigin src="./assets/index-0PPMRj-7.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-B8wC95W0.css">
   </head>
   <body>
+    <!-- All visible texts come from the translation files in src/i18n. -->
     <main id="app">
       <section class="view menu" id="view-menu">
         <div class="menu-card">
           <canvas id="menu-art" width="64" height="40" aria-hidden="true"></canvas>
           <h1 class="logo">Tamori</h1>
-          <p class="lede">Eine kleine Kreatur, ihre Lichtung und viel Zeit.</p>
+          <p class="lede" data-i18n="start.tagline"></p>
           <div class="menu-buttons">
-            <button type="button" class="primary" id="m-continue" hidden>Weiterspielen</button>
-            <button type="button" id="m-new">Neues Spiel</button>
-            <button type="button" id="m-load">Spielstand laden</button>
-            <button type="button" id="m-labor">Kreaturen-Labor</button>
+            <button type="button" class="primary" id="m-continue" data-i18n="start.continue" hidden></button>
+            <button type="button" id="m-new" data-i18n="start.new"></button>
+            <button type="button" id="m-load" data-i18n="start.load"></button>
+            <button type="button" id="m-labor" data-i18n="start.labor"></button>
           </div>
           <p class="hint" id="m-info"></p>
+          <div id="m-lang"></div>
           <p class="version" id="m-version"></p>
         </div>
       </section>
@@ -34,142 +36,121 @@
       <section class="view game" id="view-game" hidden>
         <header class="hud">
           <div class="who">
-            <p class="eyebrow" id="g-stage">Ei</p>
-            <p class="name"><span id="g-name">Tamo</span> <span class="title-small" id="g-title"></span></p>
+            <p class="eyebrow" id="g-stage"></p>
+            <p class="name"><span id="g-name"></span> <span class="title-small" id="g-title"></span></p>
           </div>
           <div class="when">
-            <p class="clock" id="g-clock">10:00</p>
-            <p class="season" id="g-season">Herbst</p>
+            <p class="clock" id="g-clock"></p>
+            <p class="season" id="g-season"></p>
           </div>
         </header>
 
         <div class="world-wrap">
-          <canvas id="world" aria-label="Die Lichtung"></canvas>
+          <canvas id="world" data-i18n-aria-label="game.world"></canvas>
           <div class="ring" id="ring" hidden></div>
         </div>
 
-        <div class="egg-panel" id="egg-panel" hidden>
-          <div class="egg-head">
-            <span class="ico" data-icon="waerme"></span>
-            <b>Brut</b>
-            <b id="egg-pct">0 %</b>
-            <span class="egg-time" id="egg-time"></span>
-          </div>
-          <div class="egg-track" role="progressbar" aria-label="Brutfortschritt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-            <span id="egg-bar"></span>
-          </div>
-          <p class="hint">
-            Das Ei schlüpft von selbst. Tippe auf <b>Wärmen</b> oder aufs Ei: jedes Mal +3 %, danach 6 Sekunden Pause.
-          </p>
-        </div>
+        <!-- Progress panels from src/config/processes.ts -->
+        <div class="processes" id="processes"></div>
         <div class="needs" id="needs"></div>
         <p class="activity"><span id="g-activity"></span></p>
         <p class="message" id="g-message" role="status"></p>
 
-        <nav class="actions" aria-label="Pflege">
-          <button type="button" id="a-feed"><span class="ico" data-icon="hunger"></span>Füttern</button>
-          <button type="button" id="a-pet"><span class="ico" data-icon="herz"></span>Streicheln</button>
-          <button type="button" id="a-play"><span class="ico" data-icon="ball"></span>Spielen</button>
-          <button type="button" id="a-wash"><span class="ico" data-icon="tropfen"></span>Waschen</button>
-          <button type="button" id="a-tuck"><span class="ico" data-icon="mond"></span>Zudecken</button>
-          <button type="button" id="a-heal"><span class="ico" data-icon="kraut"></span>Heilen</button>
-          <button type="button" id="a-bag"><span class="ico" data-icon="korb"></span>Vorrat</button>
-          <button type="button" id="a-book"><span class="ico" data-icon="buch"></span>Sammelbuch</button>
-          <button type="button" id="a-menu"><span class="ico" data-icon="menue"></span>Menü</button>
-        </nav>
+        <!-- Buttons from src/config/actions.ts -->
+        <nav class="actions" id="actions" data-i18n-aria-label="game.actions"></nav>
       </section>
 
       <section class="view lab" id="view-labor" hidden>
         <header class="masthead">
           <div class="lab-nav">
-            <button type="button" id="lab-back">← Zurück</button>
-            <button type="button" class="primary" id="lab-adopt">Als neues Ei ins Spiel übernehmen</button>
+            <button type="button" id="lab-back" data-i18n="lab.back"></button>
+            <button type="button" class="primary" id="lab-adopt" data-i18n="lab.adopt"></button>
           </div>
           <p class="status" id="lab-adopt-status" role="status"></p>
-          <p class="eyebrow">Tamori · Prototyp</p>
-          <h1>Kreaturen-Labor</h1>
-          <p class="lede">
-            Stell jede Eigenschaft selbst ein. Jede Auswahl zeigt alle möglichen Werte als kleine Vorschau deiner
-            aktuellen Kreatur. Die Kreatur oben bleibt beim Scrollen sichtbar.
-          </p>
+          <p class="eyebrow" data-i18n="lab.eyebrow"></p>
+          <h1 data-i18n="lab.title"></h1>
+          <p class="lede" data-i18n="lab.lede"></p>
         </header>
 
         <div class="workbench">
-          <aside class="preview" aria-label="Vorschau">
-            <canvas id="big" width="32" height="32" aria-label="Aktuelle Kreatur"></canvas>
+          <aside class="preview" data-i18n-aria-label="lab.preview">
+            <canvas id="big" width="32" height="32" data-i18n-aria-label="lab.current"></canvas>
             <div class="identity">
-              <p class="eyebrow" id="detail-type">Typ</p>
-              <p class="title" id="detail-title">Titel</p>
-              <p class="seed">Ei-Nr. <span id="detail-seed"></span> <span class="badge" id="seed-changed" hidden>verändert</span></p>
+              <p class="eyebrow" id="detail-type"></p>
+              <p class="title" id="detail-title"></p>
+              <p class="seed">
+                <span data-i18n="lab.eggNumberShort"></span> <span id="detail-seed"></span>
+                <span class="badge" id="seed-changed" data-i18n="lab.changed" hidden></span>
+              </p>
             </div>
-            <div class="stages" role="group" aria-label="Lebensstufe" id="stages"></div>
+            <div class="stages" role="group" data-i18n-aria-label="lab.stage" id="stages"></div>
             <div class="anim-bar">
-              <div class="anims" role="group" aria-label="Animation" id="anims"></div>
-              <button type="button" id="pause" aria-pressed="false">Pause</button>
+              <div class="anims" role="group" data-i18n-aria-label="lab.animation" id="anims"></div>
+              <button type="button" id="pause" aria-pressed="false"></button>
             </div>
           </aside>
 
           <div class="editor">
             <details class="group" open>
-              <summary>Charakter</summary>
-              <p class="hint">Ändert Mimik, Farbstimmung, Typ und Titel. Der Strich zeigt die angeborene Anlage.</p>
+              <summary data-i18n="lab.character"></summary>
+              <p class="hint" data-i18n="lab.characterHint"></p>
               <div class="sliders" id="axes"></div>
-              <button type="button" id="reset">Auf angeborenen Charakter zurücksetzen</button>
+              <button type="button" id="reset" data-i18n="lab.reset"></button>
             </details>
 
             <details class="group" open>
-              <summary>Kopf &amp; Gesicht</summary>
+              <summary data-i18n="lab.headFace"></summary>
               <div class="genes" data-genes="head ears snout eyes"></div>
             </details>
 
             <details class="group" open>
-              <summary>Körper</summary>
+              <summary data-i18n="lab.body"></summary>
               <div class="genes" data-genes="body legs feet tail"></div>
             </details>
 
             <details class="group" open>
-              <summary>Haut &amp; Farben</summary>
+              <summary data-i18n="lab.skinColors"></summary>
               <div class="genes" data-genes="skin pattern"></div>
               <div class="sliders" id="colors"></div>
               <div class="genes" data-genes="secondary patternColor"></div>
             </details>
 
             <details class="group" open>
-              <summary>Größe &amp; Vorlieben</summary>
+              <summary data-i18n="lab.sizeTastes"></summary>
               <div class="sliders" id="size"></div>
               <div class="genes" data-genes="favoriteTaste hatedTaste"></div>
             </details>
 
             <details class="group" open>
-              <summary>Gen-Code</summary>
-              <p class="hint">
-                Der Gen-Code speichert alle Gene dieser Kreatur vollständig, auch alles, was du hier verstellt hast. Kopiere
-                ihn, um die Kreatur aufzuheben oder weiterzugeben. Der aktuelle Charakter gehört nicht dazu, nur die
-                angeborene Anlage.
-              </p>
+              <summary data-i18n="lab.geneCode"></summary>
+              <p class="hint" data-i18n="lab.geneCodeHint"></p>
               <div class="code-row">
                 <code class="gene-code" id="gene-code"></code>
-                <button type="button" id="copy-code">Kopieren</button>
+                <button type="button" id="copy-code" data-i18n="lab.copy"></button>
               </div>
               <form class="seed-form" id="code-form">
-                <label for="code-input">Gen-Code laden</label>
-                <input id="code-input" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="z. B. 4K7QD-0ZX2M-…" />
-                <button type="submit">Laden</button>
+                <label for="code-input" data-i18n="lab.loadCode"></label>
+                <input
+                  id="code-input"
+                  type="text"
+                  autocomplete="off"
+                  autocapitalize="characters"
+                  spellcheck="false"
+                  data-i18n-placeholder="lab.codePlaceholder"
+                />
+                <button type="submit" data-i18n="lab.load"></button>
               </form>
               <p class="status" id="code-status" role="status"></p>
             </details>
 
             <details class="group">
-              <summary>Ei-Nummer</summary>
-              <p class="hint">
-                Die Ei-Nummer ist nur der Zufallsstartwert für ein frisch geschlüpftes Tier. Sie speichert keine Änderungen;
-                dafür gibt es den Gen-Code.
-              </p>
+              <summary data-i18n="lab.eggNumber"></summary>
+              <p class="hint" data-i18n="lab.eggNumberHint"></p>
               <form class="seed-form" id="seed-form">
-                <label for="seed-input">Ei-Nr.</label>
+                <label for="seed-input" data-i18n="lab.eggNumberShort"></label>
                 <input id="seed-input" type="number" min="0" max="4294967295" inputmode="numeric" />
-                <button type="submit">Laden</button>
-                <button type="button" id="random-seed">Zufälliges Ei</button>
+                <button type="submit" data-i18n="lab.load"></button>
+                <button type="button" id="random-seed" data-i18n="lab.randomEgg"></button>
               </form>
             </details>
           </div>
@@ -178,10 +159,10 @@
         <section class="nest" aria-labelledby="nest-title">
           <div class="nest-head">
             <div>
-              <h2 id="nest-title">Gelege</h2>
-              <p class="hint">Zufällige Vorlagen. Antippen, um sie im Editor zu bearbeiten.</p>
+              <h2 id="nest-title" data-i18n="lab.clutch"></h2>
+              <p class="hint" data-i18n="lab.clutchHint"></p>
             </div>
-            <button type="button" class="primary" id="reroll">Neue Eier legen</button>
+            <button type="button" class="primary" id="reroll" data-i18n="lab.newEggs"></button>
           </div>
           <div class="nest-grid" id="nest"></div>
         </section>
@@ -191,8 +172,8 @@
     <div class="sheet-backdrop" id="sheet" hidden>
       <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
         <div class="sheet-head">
-          <h2 id="sheet-title">Titel</h2>
-          <button type="button" class="close" id="sheet-close" aria-label="Schließen">×</button>
+          <h2 id="sheet-title"></h2>
+          <button type="button" class="close" id="sheet-close" data-i18n-aria-label="dialog.close">×</button>
         </div>
         <div class="sheet-body" id="sheet-body"></div>
       </div>
