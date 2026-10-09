@@ -10,8 +10,8 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Pixelify+Sans:wght@500;700&display=swap"
     />
-    <script type="module" crossorigin src="./assets/index-itxEQyiI.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-B8wC95W0.css">
+    <script type="module" crossorigin src="./assets/index-SqbpG52R.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-OaA6RNy_.css">
   </head>
   <body>
     <!-- All visible texts come from the translation files in src/i18n. -->
@@ -34,6 +34,9 @@
       </section>
 
       <section class="view game" id="view-game" hidden>
+        <!-- Stage: name, clock and the clearing. Side: everything to read and tap.
+             Portrait: one column; landscape: the clearing left, the side panel right. -->
+        <div class="stage">
         <header class="hud">
           <div class="who">
             <p class="eyebrow" id="g-stage"></p>
@@ -46,18 +49,33 @@
         </header>
 
         <div class="world-wrap">
-          <canvas id="world" data-i18n-aria-label="game.world"></canvas>
-          <div class="ring" id="ring" hidden></div>
+          <!-- The layer moves and zooms as a whole in the screensaver (camera) -->
+          <div class="world-layer" id="world-layer">
+            <canvas id="world" data-i18n-aria-label="game.world"></canvas>
+            <div class="ring" id="ring" hidden></div>
+          </div>
         </div>
+        </div>
+
+        <div class="side">
 
         <!-- Progress panels from src/config/processes.ts -->
         <div class="processes" id="processes"></div>
+        <!-- Wishes set on the clearing, with what the creature makes of them -->
+        <section class="wishes" id="wishes" hidden></section>
         <div class="needs" id="needs"></div>
         <p class="activity"><span id="g-activity"></span></p>
         <p class="message" id="g-message" role="status"></p>
 
-        <!-- Buttons from src/config/actions.ts -->
+        <!-- Buttons from src/config/actions.ts: care actions, then storage, collection and menu -->
         <nav class="actions" id="actions" data-i18n-aria-label="game.actions"></nav>
+        <nav class="tools" id="tools" data-i18n-aria-label="game.tools"></nav>
+        </div>
+
+        <!-- Screensaver: a cover that ends it on touch, and a quiet caption -->
+        <div class="idle-cover" id="idle-cover" hidden></div>
+        <p class="idle-caption" id="idle-caption" hidden></p>
+        <p class="idle-hint" id="idle-hint" data-i18n="idle.hint" hidden></p>
       </section>
 
       <section class="view lab" id="view-labor" hidden>
