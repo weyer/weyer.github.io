@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Tamori</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Pixelify+Sans:wght@500;700&display=swap"
+    />
+    <script type="module" crossorigin src="./assets/index-DRMwwzGi.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-Kc0xr1oR.css">
+  </head>
+  <body>
+    <main id="app">
+      <section class="view menu" id="view-menu">
+        <div class="menu-card">
+          <canvas id="menu-art" width="64" height="40" aria-hidden="true"></canvas>
+          <h1 class="logo">Tamori</h1>
+          <p class="lede">Eine kleine Kreatur, ihre Lichtung und viel Zeit.</p>
+          <div class="menu-buttons">
+            <button type="button" class="primary" id="m-continue" hidden>Weiterspielen</button>
+            <button type="button" id="m-new">Neues Spiel</button>
+            <button type="button" id="m-load">Spielstand laden</button>
+            <button type="button" id="m-labor">Kreaturen-Labor</button>
+          </div>
+          <p class="hint" id="m-info"></p>
+          <p class="version" id="m-version"></p>
+        </div>
+      </section>
+
+      <section class="view game" id="view-game" hidden>
+        <header class="hud">
+          <div class="who">
+            <p class="eyebrow" id="g-stage">Ei</p>
+            <p class="name"><span id="g-name">Tamo</span> <span class="title-small" id="g-title"></span></p>
+          </div>
+          <div class="when">
+            <p class="clock" id="g-clock">10:00</p>
+            <p class="season" id="g-season">Herbst</p>
+          </div>
+        </header>
+
+        <div class="world-wrap">
+          <canvas id="world" aria-label="Die Lichtung"></canvas>
+          <div class="ring" id="ring" hidden></div>
+        </div>
+
+        <div class="needs" id="needs"></div>
+        <p class="activity"><span id="g-activity"></span></p>
+        <p class="message" id="g-message" role="status"></p>
+
+        <nav class="actions" aria-label="Pflege">
+          <button type="button" id="a-feed"><span class="ico" data-icon="hunger"></span>Füttern</button>
+          <button type="button" id="a-pet"><span class="ico" data-icon="herz"></span>Streicheln</button>
+          <button type="button" id="a-play"><span class="ico" data-icon="ball"></span>Spielen</button>
+          <button type="button" id="a-wash"><span class="ico" data-icon="tropfen"></span>Waschen</button>
+          <button type="button" id="a-tuck"><span class="ico" data-icon="mond"></span>Zudecken</button>
+          <button type="button" id="a-heal"><span class="ico" data-icon="kraut"></span>Heilen</button>
+          <button type="button" id="a-bag"><span class="ico" data-icon="korb"></span>Vorrat</button>
+          <button type="button" id="a-book"><span class="ico" data-icon="buch"></span>Sammelbuch</button>
+          <button type="button" id="a-menu"><span class="ico" data-icon="menue"></span>Menü</button>
+        </nav>
+      </section>
+
+      <section class="view lab" id="view-labor" hidden>
+        <header class="masthead">
+          <div class="lab-nav">
+            <button type="button" id="lab-back">← Zurück</button>
+            <button type="button" class="primary" id="lab-adopt">Als neues Ei ins Spiel übernehmen</button>
+          </div>
+          <p class="status" id="lab-adopt-status" role="status"></p>
+          <p class="eyebrow">Tamori · Prototyp</p>
+          <h1>Kreaturen-Labor</h1>
+          <p class="lede">
+            Stell jede Eigenschaft selbst ein. Jede Auswahl zeigt alle möglichen Werte als kleine Vorschau deiner
+            aktuellen Kreatur. Die Kreatur oben bleibt beim Scrollen sichtbar.
+          </p>
+        </header>
+
+        <div class="workbench">
+          <aside class="preview" aria-label="Vorschau">
+            <canvas id="big" width="32" height="32" aria-label="Aktuelle Kreatur"></canvas>
+            <div class="identity">
+              <p class="eyebrow" id="detail-type">Typ</p>
+              <p class="title" id="detail-title">Titel</p>
+              <p class="seed">Ei-Nr. <span id="detail-seed"></span> <span class="badge" id="seed-changed" hidden>verändert</span></p>
+            </div>
+            <div class="stages" role="group" aria-label="Lebensstufe" id="stages"></div>
+            <div class="anim-bar">
+              <div class="anims" role="group" aria-label="Animation" id="anims"></div>
+              <button type="button" id="pause" aria-pressed="false">Pause</button>
+            </div>
+          </aside>
+
+          <div class="editor">
+            <details class="group" open>
+              <summary>Charakter</summary>
+              <p class="hint">Ändert Mimik, Farbstimmung, Typ und Titel. Der Strich zeigt die angeborene Anlage.</p>
+              <div class="sliders" id="axes"></div>
+              <button type="button" id="reset">Auf angeborenen Charakter zurücksetzen</button>
+            </details>
+
+            <details class="group" open>
+              <summary>Kopf &amp; Gesicht</summary>
+              <div class="genes" data-genes="head ears snout eyes"></div>
+            </details>
+
+            <details class="group" open>
+              <summary>Körper</summary>
+              <div class="genes" data-genes="body legs feet tail"></div>
+            </details>
+
+            <details class="group" open>
+              <summary>Haut &amp; Farben</summary>
+              <div class="genes" data-genes="skin pattern"></div>
+              <div class="sliders" id="colors"></div>
+              <div class="genes" data-genes="secondary patternColor"></div>
+            </details>
+
+            <details class="group" open>
+              <summary>Größe &amp; Vorlieben</summary>
+              <div class="sliders" id="size"></div>
+              <div class="genes" data-genes="favoriteTaste hatedTaste"></div>
+            </details>
+
+            <details class="group" open>
+              <summary>Gen-Code</summary>
+              <p class="hint">
+                Der Gen-Code speichert alle Gene dieser Kreatur vollständig, auch alles, was du hier verstellt hast. Kopiere
+                ihn, um die Kreatur aufzuheben oder weiterzugeben. Der aktuelle Charakter gehört nicht dazu, nur die
+                angeborene Anlage.
+              </p>
+              <div class="code-row">
+                <code class="gene-code" id="gene-code"></code>
+                <button type="button" id="copy-code">Kopieren</button>
+              </div>
+              <form class="seed-form" id="code-form">
+                <label for="code-input">Gen-Code laden</label>
+                <input id="code-input" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="z. B. 4K7QD-0ZX2M-…" />
+                <button type="submit">Laden</button>
+              </form>
+              <p class="status" id="code-status" role="status"></p>
+            </details>
+
+            <details class="group">
+              <summary>Ei-Nummer</summary>
+              <p class="hint">
+                Die Ei-Nummer ist nur der Zufallsstartwert für ein frisch geschlüpftes Tier. Sie speichert keine Änderungen;
+                dafür gibt es den Gen-Code.
+              </p>
+              <form class="seed-form" id="seed-form">
+                <label for="seed-input">Ei-Nr.</label>
+                <input id="seed-input" type="number" min="0" max="4294967295" inputmode="numeric" />
+                <button type="submit">Laden</button>
+                <button type="button" id="random-seed">Zufälliges Ei</button>
+              </form>
+            </details>
+          </div>
+        </div>
+
+        <section class="nest" aria-labelledby="nest-title">
+          <div class="nest-head">
+            <div>
+              <h2 id="nest-title">Gelege</h2>
+              <p class="hint">Zufällige Vorlagen. Antippen, um sie im Editor zu bearbeiten.</p>
+            </div>
+            <button type="button" class="primary" id="reroll">Neue Eier legen</button>
+          </div>
+          <div class="nest-grid" id="nest"></div>
+        </section>
+      </section>
+    </main>
+
+    <div class="sheet-backdrop" id="sheet" hidden>
+      <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+        <div class="sheet-head">
+          <h2 id="sheet-title">Titel</h2>
+          <button type="button" class="close" id="sheet-close" aria-label="Schließen">×</button>
+        </div>
+        <div class="sheet-body" id="sheet-body"></div>
+      </div>
+    </div>
+  </body>
+</html>
