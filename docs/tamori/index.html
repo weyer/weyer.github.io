@@ -10,8 +10,8 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Geist+Pixel&display=swap"
     />
-    <script type="module" crossorigin src="./assets/index-B5K6XhZR.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-DmKna0oD.css">
+    <script type="module" crossorigin src="./assets/index-rrXbcJDC.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DxLumGqB.css">
   </head>
   <body>
     <!-- All visible texts come from the translation files in src/i18n. -->
@@ -49,6 +49,9 @@
           </button>
         </header>
 
+        <!-- How the creature is doing: the needs, between its name and the clearing -->
+        <div class="needs" id="needs"></div>
+
         <div class="world-wrap">
           <!-- The layer moves and zooms as a whole in the screensaver (camera) -->
           <div class="world-layer" id="world-layer">
@@ -64,7 +67,6 @@
         <div class="processes" id="processes"></div>
         <!-- Wishes set on the clearing, with what the creature makes of them -->
         <section class="wishes" id="wishes" hidden></section>
-        <div class="needs" id="needs"></div>
         <p class="message" id="g-message" role="status"></p>
 
         <!-- Buttons from src/config/actions.ts: care actions, then storage, collection and menu -->
