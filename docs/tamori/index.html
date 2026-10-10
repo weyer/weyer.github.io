@@ -8,10 +8,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Pixelify+Sans:wght@500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist+Pixel&display=swap"
     />
-    <script type="module" crossorigin src="./assets/index-Cr_TjKBq.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-D4Ur1F43.css">
+    <script type="module" crossorigin src="./assets/index-KozWVDGa.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DmM1NmTi.css">
   </head>
   <body>
     <!-- All visible texts come from the translation files in src/i18n. -->
@@ -39,8 +39,8 @@
         <header class="hud">
           <!-- Tapping name and title opens the profile (src/ui/profile.ts) -->
           <button type="button" class="who" id="g-who" data-i18n-title="hud.profile">
-            <span class="eyebrow" id="g-stage"></span>
-            <span class="name"><span id="g-name"></span> <span class="who-icon" data-icon="profile"></span> <span class="title-small" id="g-title"></span></span>
+            <span class="eyebrow"><span class="who-icon" data-icon="profile"></span> <span id="g-stage"></span></span>
+            <span class="name"><span id="g-name"></span> <span class="title-small" id="g-title"></span></span>
           </button>
           <div class="when">
             <p class="clock" id="g-clock"></p>
@@ -64,7 +64,6 @@
         <!-- Wishes set on the clearing, with what the creature makes of them -->
         <section class="wishes" id="wishes" hidden></section>
         <div class="needs" id="needs"></div>
-        <p class="activity"><span id="g-activity"></span></p>
         <p class="message" id="g-message" role="status"></p>
 
         <!-- Buttons from src/config/actions.ts: care actions, then storage, collection and menu -->
