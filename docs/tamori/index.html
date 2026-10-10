@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Tamori</title>
-    <script type="module" crossorigin src="./assets/index-fgpGAk8x.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-Dmuea9f8.css">
+    <script type="module" crossorigin src="./assets/index-GE2eGz7y.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-C8uNQ9XM.css">
   </head>
   <body>
     <!-- All visible texts come from the translation files in src/i18n. -->
@@ -38,13 +38,18 @@
           </button>
           <!-- Tapping date and clock opens the calendar (src/ui/calendar.ts) -->
           <button type="button" class="when" id="g-when" data-i18n-title="calendar.open">
-            <span class="clock"><span class="when-icon" data-icon="calendar"></span> <span id="g-clock"></span></span>
+            <span class="clock"><span class="when-icon" data-icon="calendar"></span> <span id="g-clock"></span> <span class="clock-date" id="g-date"></span></span>
             <span class="season" id="g-season"></span>
           </button>
         </header>
 
         <!-- How the creature is doing: the needs, between its name and the clearing -->
-        <div class="needs" id="needs"></div>
+        <div class="status">
+          <div class="needs" id="needs"></div>
+          <!-- Sound on or off with one tap (on: also when the device is set to silent); in the free
+               place after the needs, and there even when the needs are hidden -->
+          <button type="button" class="sound-toggle" id="g-sound"><span data-icon="soundOn"></span></button>
+        </div>
 
         <div class="world-wrap">
           <!-- The layer moves and zooms as a whole in the screensaver (camera) -->
