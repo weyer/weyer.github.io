@@ -10,8 +10,8 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Geist+Pixel&display=swap"
     />
-    <script type="module" crossorigin src="./assets/index-KozWVDGa.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-DmM1NmTi.css">
+    <script type="module" crossorigin src="./assets/index-D7PZs7Ej.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BRiLq3Mo.css">
   </head>
   <body>
     <!-- All visible texts come from the translation files in src/i18n. -->
@@ -42,10 +42,11 @@
             <span class="eyebrow"><span class="who-icon" data-icon="profile"></span> <span id="g-stage"></span></span>
             <span class="name"><span id="g-name"></span> <span class="title-small" id="g-title"></span></span>
           </button>
-          <div class="when">
-            <p class="clock" id="g-clock"></p>
-            <p class="season" id="g-season"></p>
-          </div>
+          <!-- Tapping date and clock opens the calendar (src/ui/calendar.ts) -->
+          <button type="button" class="when" id="g-when" data-i18n-title="calendar.open">
+            <span class="clock"><span class="when-icon" data-icon="calendar"></span> <span id="g-clock"></span></span>
+            <span class="season" id="g-season"></span>
+          </button>
         </header>
 
         <div class="world-wrap">
