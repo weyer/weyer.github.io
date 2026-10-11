@@ -1,6 +1,6 @@
 {
   "name": "Tamori Beta",
-  "short_name": "Tamori β",
+  "short_name": "Tamori Beta",
   "description": "A pixel-art pet on a clearing. Works offline.",
   "start_url": "./",
   "scope": "./",
