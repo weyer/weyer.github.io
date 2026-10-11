@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Tamori Beta</title>
+    <!-- Installable as an app (Home Screen, Dock, desktop): installed apps keep their data more reliably -->
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" type="image/png" href="./icons/favicon-32.png" />
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
+    <meta name="theme-color" content="#2f6f3a" />
+    <script type="module" crossorigin src="./assets/index-DSqOqK2S.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CQBmssgP.css">
+  </head>
+  <body>
+    <!-- All visible texts come from the translation files in src/i18n. -->
+    <main id="app">
+      <section class="view menu" id="view-menu">
+        <div class="menu-card">
+          <canvas id="menu-art" width="64" height="40" aria-hidden="true"></canvas>
+          <h1 class="logo">Tamori</h1>
+          <p class="lede" data-i18n="start.tagline"></p>
+          <div class="menu-buttons">
+            <button type="button" class="primary" id="m-continue" data-i18n="start.continue" hidden></button>
+            <button type="button" id="m-new" data-i18n="start.new"></button>
+            <button type="button" id="m-load" data-i18n="start.load"></button>
+          </div>
+          <p class="hint" id="m-info"></p>
+          <!-- Beta build only: what the beta is, and copying the normal game's save -->
+          <div class="beta-box" id="m-beta" hidden></div>
+          <div id="m-lang"></div>
+          <p class="version" id="m-version"></p>
+        </div>
+      </section>
+
+      <section class="view game" id="view-game" hidden>
+        <!-- Stage: name, clock and the clearing. Side: everything to read and tap.
+             Portrait: one column; landscape: the clearing left, the side panel right. -->
+        <div class="stage">
+        <header class="hud">
+          <!-- Tapping name and title opens the profile (src/ui/profile.ts) -->
+          <button type="button" class="who" id="g-who" data-i18n-title="hud.profile">
+            <span class="eyebrow"><span class="who-icon" data-icon="profile"></span> <span id="g-stage"></span></span>
+            <span class="name"><span id="g-name"></span> <span class="title-small" id="g-title"></span></span>
+          </button>
+          <!-- Tapping date and clock opens the calendar (src/ui/calendar.ts) -->
+          <button type="button" class="when" id="g-when" data-i18n-title="calendar.open">
+            <span class="clock"><span class="when-icon" data-icon="calendar"></span> <span id="g-clock"></span> <span class="clock-date" id="g-date"></span></span>
+            <span class="season" id="g-season"></span>
+          </button>
+        </header>
+
+        <!-- How the creature is doing: the needs, between its name and the clearing -->
+        <div class="status">
+          <div class="needs" id="needs"></div>
+          <!-- Back the save up with one tap, sound on or off with one tap; in the free place after
+               the needs, and there even when the needs are hidden -->
+          <div class="hud-tools" id="g-tools">
+            <button type="button" class="sound-toggle" id="g-backup" data-i18n-aria-label="hud.backup" data-i18n-title="hud.backup"><span data-icon="floppy"></span></button>
+            <button type="button" class="sound-toggle" id="g-sound"><span data-icon="soundOn"></span></button>
+          </div>
+        </div>
+
+        <div class="world-wrap">
+          <!-- The layer moves and zooms as a whole in the screensaver (camera) -->
+          <div class="world-layer" id="world-layer">
+            <canvas id="world" data-i18n-aria-label="game.world"></canvas>
+            <div class="ring" id="ring" hidden></div>
+          </div>
+        </div>
+        </div>
+
+        <div class="side">
+
+        <!-- Progress panels from src/config/processes.ts -->
+        <div class="processes" id="processes"></div>
+        <!-- Wishes set on the clearing, with what the creature makes of them -->
+        <section class="wishes" id="wishes" hidden></section>
+        <p class="message" id="g-message" role="status"></p>
+
+        <!-- Buttons from src/config/actions.ts: care actions, then storage, collection and menu -->
+        <nav class="actions" id="actions" data-i18n-aria-label="game.actions"></nav>
+        <nav class="tools" id="tools" data-i18n-aria-label="game.tools"></nav>
+        </div>
+
+        <!-- Screensaver: a cover that ends it on touch, and a quiet caption -->
+        <div class="idle-cover" id="idle-cover" hidden></div>
+        <p class="idle-caption" id="idle-caption" hidden></p>
+        <p class="idle-hint" id="idle-hint" hidden></p>
+      </section>
+
+      <section class="view lab" id="view-labor" hidden>
+        <header class="masthead">
+          <div class="lab-nav">
+            <button type="button" id="lab-back" data-i18n="lab.back"></button>
+            <button type="button" class="primary" id="lab-adopt" data-i18n="lab.adopt"></button>
+          </div>
+          <p class="status" id="lab-adopt-status" role="status"></p>
+          <p class="eyebrow" data-i18n="lab.eyebrow"></p>
+          <h1 data-i18n="lab.title"></h1>
+          <p class="lede" data-i18n="lab.lede"></p>
+        </header>
+
+        <div class="workbench">
+          <aside class="preview" data-i18n-aria-label="lab.preview">
+            <canvas id="big" width="32" height="32" data-i18n-aria-label="lab.current"></canvas>
+            <div class="identity">
+              <p class="eyebrow" id="detail-type"></p>
+              <p class="title" id="detail-title"></p>
+              <p class="seed">
+                <span data-i18n="lab.eggNumberShort"></span> <span id="detail-seed"></span>
+                <span class="badge" id="seed-changed" data-i18n="lab.changed" hidden></span>
+              </p>
+            </div>
+            <div class="stages" role="group" data-i18n-aria-label="lab.stage" id="stages"></div>
+            <div class="anim-bar">
+              <div class="anims" role="group" data-i18n-aria-label="lab.animation" id="anims"></div>
+              <button type="button" id="pause" aria-pressed="false"></button>
+            </div>
+          </aside>
+
+          <div class="editor">
+            <details class="group" open>
+              <summary data-i18n="lab.character"></summary>
+              <p class="hint" data-i18n="lab.characterHint"></p>
+              <div class="sliders" id="axes"></div>
+              <button type="button" id="reset" data-i18n="lab.reset"></button>
+            </details>
+
+            <details class="group" open>
+              <summary data-i18n="lab.headFace"></summary>
+              <div class="genes" data-genes="head ears snout eyes"></div>
+            </details>
+
+            <details class="group" open>
+              <summary data-i18n="lab.body"></summary>
+              <div class="genes" data-genes="body legs feet tail"></div>
+            </details>
+
+            <details class="group" open>
+              <summary data-i18n="lab.skinColors"></summary>
+              <div class="genes" data-genes="skin pattern"></div>
+              <div class="sliders" id="colors"></div>
+              <div class="genes" data-genes="secondary patternColor"></div>
+            </details>
+
+            <details class="group" open>
+              <summary data-i18n="lab.sizeTastes"></summary>
+              <div class="sliders" id="size"></div>
+              <div class="genes" data-genes="favoriteTaste hatedTaste"></div>
+            </details>
+
+            <details class="group" open>
+              <summary data-i18n="lab.geneCode"></summary>
+              <p class="hint" data-i18n="lab.geneCodeHint"></p>
+              <div class="code-row">
+                <code class="gene-code" id="gene-code"></code>
+                <button type="button" id="copy-code" data-i18n="lab.copy"></button>
+              </div>
+              <form class="seed-form" id="code-form">
+                <label for="code-input" data-i18n="lab.loadCode"></label>
+                <input
+                  id="code-input"
+                  type="text"
+                  autocomplete="off"
+                  autocapitalize="characters"
+                  spellcheck="false"
+                  data-i18n-placeholder="lab.codePlaceholder"
+                />
+                <button type="submit" data-i18n="lab.load"></button>
+              </form>
+              <p class="status" id="code-status" role="status"></p>
+              <!-- Save as image / load from image (src/ui/codeui.ts) -->
+              <div class="row" id="code-image"></div>
+            </details>
+
+            <details class="group">
+              <summary data-i18n="lab.eggNumber"></summary>
+              <p class="hint" data-i18n="lab.eggNumberHint"></p>
+              <form class="seed-form" id="seed-form">
+                <label for="seed-input" data-i18n="lab.eggNumberShort"></label>
+                <input id="seed-input" type="number" min="0" max="4294967295" inputmode="numeric" />
+                <button type="submit" data-i18n="lab.load"></button>
+                <button type="button" id="random-seed" data-i18n="lab.randomEgg"></button>
+              </form>
+            </details>
+          </div>
+        </div>
+
+        <section class="nest" aria-labelledby="nest-title">
+          <div class="nest-head">
+            <div>
+              <h2 id="nest-title" data-i18n="lab.clutch"></h2>
+              <p class="hint" data-i18n="lab.clutchHint"></p>
+            </div>
+            <button type="button" class="primary" id="reroll" data-i18n="lab.newEggs"></button>
+          </div>
+          <div class="nest-grid" id="nest"></div>
+        </section>
+      </section>
+    </main>
+
+    <div class="sheet-backdrop" id="sheet" hidden>
+      <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+        <div class="sheet-head">
+          <h2 id="sheet-title"></h2>
+          <button type="button" class="close" id="sheet-close" data-i18n-aria-label="dialog.close">×</button>
+        </div>
+        <div class="sheet-body" id="sheet-body"></div>
+      </div>
+    </div>
+  </body>
+</html>
