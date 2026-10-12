@@ -4,16 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Tamori</title>
-    <script type="module" crossorigin src="./assets/index-BTukDQ2Y.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-Bv-yqx2T.css">
+    <!-- Installable as an app (Home Screen, Dock, desktop): installed apps keep their data more reliably -->
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" type="image/png" href="./icons/favicon-32.png" />
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
+    <meta name="theme-color" content="#2f6f3a" />
+    <script type="module" crossorigin src="./assets/index-Cghl8CTo.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CLVpAmQ0.css">
   </head>
   <body>
     <!-- All visible texts come from the translation files in src/i18n. -->
     <main id="app">
       <section class="view menu" id="view-menu">
         <div class="menu-card">
-          <canvas id="menu-art" width="64" height="40" aria-hidden="true"></canvas>
-          <h1 class="logo">Tamori</h1>
+          <div class="menu-art-wrap">
+            <canvas id="menu-art" width="64" height="40" aria-hidden="true"></canvas>
+            <span class="beta-badge" data-i18n="beta.badge" hidden></span>
+          </div>
+          <h1 class="logo">Tamori <span class="beta-mark" data-i18n="beta.badge" hidden></span></h1>
+          <p class="name-origin" data-i18n="start.nameOrigin"></p>
           <p class="lede" data-i18n="start.tagline"></p>
           <div class="menu-buttons">
             <button type="button" class="primary" id="m-continue" data-i18n="start.continue" hidden></button>
@@ -21,6 +30,8 @@
             <button type="button" id="m-load" data-i18n="start.load"></button>
           </div>
           <p class="hint" id="m-info"></p>
+          <!-- Beta build only: what the beta is, and copying the normal game's save -->
+          <div class="beta-box" id="m-beta" hidden></div>
           <div id="m-lang"></div>
           <p class="version" id="m-version"></p>
         </div>
@@ -46,9 +57,12 @@
         <!-- How the creature is doing: the needs, between its name and the clearing -->
         <div class="status">
           <div class="needs" id="needs"></div>
-          <!-- Sound on or off with one tap (on: also when the device is set to silent); in the free
-               place after the needs, and there even when the needs are hidden -->
-          <button type="button" class="sound-toggle" id="g-sound"><span data-icon="soundOn"></span></button>
+          <!-- Back the save up with one tap, sound on or off with one tap; in the free place after
+               the needs, and there even when the needs are hidden -->
+          <div class="hud-tools" id="g-tools">
+            <button type="button" class="sound-toggle" id="g-backup" data-i18n-aria-label="hud.backup" data-i18n-title="hud.backup"><span data-icon="floppy"></span></button>
+            <button type="button" class="sound-toggle" id="g-sound"><span data-icon="soundOn"></span></button>
+          </div>
         </div>
 
         <div class="world-wrap">
@@ -57,6 +71,7 @@
             <canvas id="world" data-i18n-aria-label="game.world"></canvas>
             <div class="ring" id="ring" hidden></div>
           </div>
+          <span class="beta-badge on-board" data-i18n="beta.badge" hidden></span>
         </div>
         </div>
 
