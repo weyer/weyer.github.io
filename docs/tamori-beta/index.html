@@ -9,8 +9,8 @@
     <link rel="icon" type="image/png" href="./icons/favicon-32.png" />
     <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
     <meta name="theme-color" content="#2f6f3a" />
-    <script type="module" crossorigin src="./assets/index-BSM2Vb9O.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-d92Mbxx8.css">
+    <script type="module" crossorigin src="./assets/index-CmL8gdCe.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DhyzGoy0.css">
   </head>
   <body>
     <!-- All visible texts come from the translation files in src/i18n. -->
@@ -97,6 +97,12 @@
         <div class="idle-cover" id="idle-cover" hidden></div>
         <p class="idle-caption" id="idle-caption" hidden></p>
         <p class="idle-hint" id="idle-hint" hidden></p>
+        <!-- New Year's Eve: the big countdown over the clearing (src/ui/countdown.ts) -->
+        <div class="countdown" id="countdown" hidden>
+          <p class="countdown-title" id="countdown-title"></p>
+          <canvas class="countdown-digits" id="countdown-digits" aria-hidden="true"></canvas>
+          <p class="countdown-title countdown-sub" id="countdown-sub" hidden></p>
+        </div>
       </section>
 
       <section class="view lab" id="view-labor" hidden>
