@@ -9,8 +9,8 @@
     <link rel="icon" type="image/png" href="./icons/favicon-32.png" />
     <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
     <meta name="theme-color" content="#2f6f3a" />
-    <script type="module" crossorigin src="./assets/index-CLuefy-d.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-_urHgDax.css">
+    <script type="module" crossorigin src="./assets/index-B3mM_G2k.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CGoRQorP.css">
   </head>
   <body>
     <!-- All visible texts come from the translation files in src/i18n. -->
@@ -70,6 +70,20 @@
           <div class="world-layer" id="world-layer">
             <canvas id="world" data-i18n-aria-label="game.world"></canvas>
             <div class="ring" id="ring" hidden></div>
+            <!-- The egg-and-spoon race (src/ui/game.ts): how to play with a practice round, then the timing bar -->
+            <div class="race-bar" id="race-bar" hidden>
+              <div class="race-intro" id="race-intro">
+                <canvas class="race-pic" id="race-pic" width="40" height="20" aria-hidden="true"></canvas>
+                <p class="race-text" id="race-text"></p>
+              </div>
+              <div class="race-row" id="race-row" role="button" tabindex="0" data-i18n-aria-label="eggRace.tapHint">
+                <canvas class="race-icon" id="race-icon" width="12" height="12" aria-hidden="true"></canvas>
+                <span class="race-track" id="race-track"><span class="race-green" id="race-green"></span><span class="race-marker" id="race-marker"></span></span>
+                <canvas class="race-icon race-finger" id="race-finger" width="9" height="12" aria-hidden="true"></canvas>
+              </div>
+              <span class="race-say" id="race-say"></span>
+              <button type="button" class="primary race-go" id="race-go" hidden></button>
+            </div>
             <!-- Place mode of the build book: where the plan should go (src/ui/game.ts) -->
             <div class="place-bar" id="place-bar" hidden><span id="place-text"></span><button type="button" id="place-cancel" data-i18n="build.cancel"></button></div>
           </div>
